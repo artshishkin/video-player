@@ -5,10 +5,56 @@
     <title>Play Video</title>
 </head>
 <body>
-<video autoplay="autoplay" controls>
-<!--    <source src="/videos/192.168.1.11_01_20200324_120000.avi/full">-->
-<!--    <source src="/videos/192.168.1.11_01_20200324_120000.avi/full" type="video/mp4">-->
-    <source src="/videos/20200624_195616.mp4/full" type="video/mp4">
+<video id="Test_Video" autoplay="autoplay" width="640" height="480" controls="controls">
+
+    <!--    <source src="/videos/192.168.1.11_01_20200324_120000.avi/full">-->
+    <!--    <source src="/videos/192.168.1.11_01_20200324_120000.avi/full" type="video/mp4">-->
+    <!--    <source src="/videos/20200624_195616.mp4/full" type="video/mp4">-->
+    <!--    <source src="http://farm05:8090/videos/play?video_file_path=d%3A%5CRecord%5C192.168.1.12%5C1%5C20200719_120000.h264" type="video/mp4">-->
+    <!--    <source src="http://farm05:8090/videos/play?video_file_path=D%3A%5CArchive%5CiSpy%5CWebServerRoot%5CMedia%5CVideo%5C192.168.1.11%5C1_2020-07-19_12-39-56.mp4" type="video/mp4">-->
+    <source src="http://farm05:8090/videos/play?video_file_path=d%3A%5CRecord%5C192.168.1.11%5C1%5C20200720_093000.h264"
+            type="video/mp4">
 </video>
+<p>
+    <button onclick="getPlaybackRate()">
+        Play Rate
+    </button>
+    <button onclick="setPlaybackRate(0.25)">0.25</button>
+    <button onclick="setPlaybackRate(0.5)">0.5</button>
+    <button onclick="setPlaybackRate(1)">1</button>
+    <button onclick="setPlaybackRate(2)">2</button>
+    <button onclick="setPlaybackRate(4)">4</button>
+    <label>Position</label>
+    <button onclick="addPosition(-10)">-10</button>
+    <button onclick="addPosition(-5)">-5</button>
+    <button onclick="addPosition(1)">+1</button>
+    <button onclick="addPosition(5)">+5</button>
+    <button onclick="addPosition(10)">+10</button>
+    <input type="number" id="setTimePosition" onchange="setPosition()"/>
+    <button onclick="setPosition()">set</button>
+</p>
+
+<script>
+    const videoPlayer = document.getElementById("Test_Video");
+    const positionText = document.getElementById("setTimePosition");
+
+    function getPlaybackRate() {
+        alert(videoPlayer.playbackRate);
+    }
+
+    function setPlaybackRate(speed) {
+        videoPlayer.playbackRate = speed;
+    }
+
+    function addPosition(deltaSec) {
+        videoPlayer.fastSeek(videoPlayer.currentTime + deltaSec);
+    }
+
+    function setPosition() {
+        videoPlayer.fastSeek(positionText.value);
+    }
+
+
+</script>
 </body>
 </html>
