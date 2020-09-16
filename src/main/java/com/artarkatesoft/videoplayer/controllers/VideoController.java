@@ -1,14 +1,12 @@
 package com.artarkatesoft.videoplayer.controllers;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.ResourceRegion;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -55,10 +53,10 @@ public class VideoController {
             start = range.getRangeStart(contentLength);
             long end = range.getRangeEnd(contentLength);
             long rangeLength = Long.min(1000000L, end - start + 1L);
-            resourceRegion = new ResourceRegion((Resource) video, start, rangeLength);
+            resourceRegion = new ResourceRegion(video, start, rangeLength);
         } else {
             start = Long.min(1000000L, contentLength);
-            resourceRegion = new ResourceRegion((Resource) video, 0L, start);
+            resourceRegion = new ResourceRegion(video, 0L, start);
         }
         return resourceRegion;
     }
